@@ -1,39 +1,62 @@
+ruby '2.2.4'
 source 'https://rubygems.org'
 
+gem 'rails', '4.2.6'
+gem 'pg', '~> 0.18.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.8'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+# Core API Framework gems
+gem 'grape', '~> 0.15'
+gem 'grape-entity'
+gem 'puma', '~> 2.14.0'
+gem 'rack-cors', require: 'rack/cors'
+gem 'discourse_api'
 
-# Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
-# bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0',          group: :doc
+# HTTP requests
+gem 'httparty'
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+# Auto Documentation
+gem 'grape-swagger'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Asynchronous jobs
+gem 'sidekiq'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+#sidekiq web dashboard
+gem 'sinatra'
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+# JSON parsing
+gem 'oj'
+gem 'oj_mimic_json'
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin]
+# Authentication gems
+gem 'jwt', '~> 1.5.2'
+gem 'bcrypt', '~> 3.1.10'
+gem 'devise'
+
+group :development, :test, :staging, :qa do
+  gem 'dotenv'
+  gem 'faker'
+end
+
+group :development, :test do
+  gem 'foreman'
+  gem 'rack-console'
+  gem 'timecop'
+  gem 'pry'
+end
+
+group :test, :qa do
+  gem 'rack-test'
+  gem 'rspec'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'airborne'
+  gem 'factory_girl'
+  gem 'mailinator'
+end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  gem 'derailed'
+  gem 'spring'
+end
